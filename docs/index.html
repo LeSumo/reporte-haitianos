@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<style>body{background-color:#faf6f0;}</style>
+<link href="reporte_files/htmltools-fill-0.5.9/fill.css" rel="stylesheet" />
+<script src="reporte_files/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="reporte_files/plotly-binding-4.12.1/plotly.js"></script>
+<script src="reporte_files/typedarray-0.1/typedarray.min.js"></script>
+<script src="reporte_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="reporte_files/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet" />
+<script src="reporte_files/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<link href="reporte_files/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="reporte_files/plotly-main-2.25.2/plotly-latest.min.js"></script>
+<link href="reporte_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="reporte_files/datatables-binding-0.34.0/datatables.js"></script>
+<link href="reporte_files/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="reporte_files/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="reporte_files/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="reporte_files/jszip-1.13.6/jszip.min.js"></script>
+<script src="reporte_files/pdfmake-1.13.6/pdfmake.js"></script>
+<script src="reporte_files/pdfmake-1.13.6/vfs_fonts.js"></script>
+<link href="reporte_files/dt-ext-buttons-1.13.6/css/buttons.dataTables.min.css" rel="stylesheet" />
+<script src="reporte_files/dt-ext-buttons-1.13.6/js/dataTables.buttons.min.js"></script>
+<script src="reporte_files/dt-ext-buttons-1.13.6/js/buttons.html5.min.js"></script>
+<script src="reporte_files/dt-ext-buttons-1.13.6/js/buttons.colVis.min.js"></script>
+<script src="reporte_files/dt-ext-buttons-1.13.6/js/buttons.print.min.js"></script>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Comunidad haitiana en México - Encuesta Intercensal 2025</title>
+  <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; }
+      body { font-family: Georgia, serif; background: #faf6f0; color: #333; line-height: 1.6; }
+
+      /* ENCABEZADO */
+      header { background: linear-gradient(135deg, #00209f 0%, #d21034 100%); color: #fff; padding: 60px 20px 50px; text-align: center; position: relative; overflow: hidden; }
+      header::before { content: ''; position: absolute; top: -50%; right: -20%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(255,215,0,0.15), transparent 70%); border-radius: 50%; }
+      header::after { content: ''; position: absolute; bottom: -50%; left: -20%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 70%); border-radius: 50%; }
+      header h1 { font-size: 42px; margin-bottom: 12px; letter-spacing: 1px; position: relative; z-index: 1; }
+      header .sub { font-size: 15px; opacity: 0.9; letter-spacing: 5px; text-transform: uppercase; position: relative; z-index: 1; }
+      header .autor { font-size: 14px; opacity: 0.85; margin-top: 25px; font-style: italic; position: relative; z-index: 1; }
+      header .linea-deco { width: 80px; height: 2px; background: #ffd700; margin: 20px auto; position: relative; z-index: 1; }
+
+      /* NAVEGACIÓN */
+      nav.toc { background: #fff; padding: 15px 20px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #e0d5c5; }
+      nav.toc a { display: inline-block; margin: 5px 10px; color: #00209f; text-decoration: none; font-size: 13px; font-weight: 700; letter-spacing: 1px; padding: 6px 14px; border-radius: 20px; transition: all 0.2s; text-transform: uppercase; }
+      nav.toc a:hover { background: #00209f; color: #fff; }
+
+      /* CONTENEDOR */
+      .container { max-width: 1300px; margin: 0 auto; padding: 40px 20px 60px; }
+
+      /* SECCIONES */
+      section { background: #fff; border-radius: 16px; padding: 35px 30px; margin-bottom: 50px; box-shadow: 0 6px 30px rgba(0,0,0,0.08); border-top: 4px solid #d21034; scroll-margin-top: 80px; }
+      section h2 { font-size: 26px; color: #00209f; margin-bottom: 8px; }
+      section .desc { color: #666; font-size: 14px; font-style: italic; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px dashed #e0d5c5; }
+
+      /* PIE */
+      footer { background: #1a1a2e; color: #fff; padding: 40px 20px; text-align: center; }
+      footer p { font-size: 13px; opacity: 0.8; margin-bottom: 8px; }
+      footer .fuente { font-size: 11px; opacity: 0.6; margin-top: 20px; letter-spacing: 1px; }
+
+      /* FORZAR QUE LA FUENTE DE LA TABLA SE VEA SIEMPRE */
+      table.dataTable caption {
+        display: table-caption !important;
+        caption-side: bottom !important;
+        text-align: left !important;
+        padding: 12px 0 0 0 !important;
+        font-style: italic;
+        color: #666;
+        border-top: 1px solid #e8e8e8;
+        margin-top: 10px;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 700px) {
+        header h1 { font-size: 28px; }
+        header .sub { font-size: 11px; letter-spacing: 3px; }
+        section { padding: 20px 15px; }
+        section h2 { font-size: 20px; }
+        nav.toc a { font-size: 11px; padding: 5px 10px; margin: 3px 5px; }
+      }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="sub">Encuesta Intercensal 2025 · INEGI</div>
+    <h1>Comunidad haitiana en México</h1>
+    <div class="linea-deco"></div>
+    <div class="autor">Elaborado por Berthony Pierrin</div>
+  </header>
+  <nav class="toc">
+    <a href="#sec1">Población por entidad</a>
+    <a href="#sec2">Distribución por edad</a>
+    <a href="#sec3">Distribución por sexo</a>
+    <a href="#sec4">Estimaciones por entidad</a>
+  </nav>
+  <div class="container">
+    <section id="sec1">
+      <h2>Población haitiana por entidad federativa</h2>
+      <p class="desc">Personas nacidas en Haití residentes en México, por estado</p>
+      <div class="plotly html-widget html-fill-item" id="htmlwidget-412be090ec93f06d2716" style="width:100%;height:400px;"></div>
+      <script type="application/json" data-for="htmlwidget-412be090ec93f06d2716">{"x":{"visdat":{"4cc4679f2043":["function () ","plotlyVisDat"]},"cur_data":"4cc4679f2043","attrs":{"4cc4679f2043":{"x":{},"y":{},"marker":{"color":{},"colorscale":[["0","#fee5d9"],["1","#a50f15"]],"line":{"color":"#67000d","width":1}},"hovertemplate":"<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":180,"l":60,"t":80,"r":10},"title":{"text":"<b>Población nacida en Haití por entidad federativa<\/b><br><sub>México, Encuesta Intercensal 2025<\/sub>","font":{"family":"Georgia, serif","size":16}},"xaxis":{"domain":[0,1],"automargin":true,"title":"","tickangle":-45,"tickfont":{"size":10},"type":"category","categoryorder":"array","categoryarray":["Baja California Sur","Colima","Chihuahua","Durango","Guanajuato","Michoacán","Nayarit","Sinaloa","Zacatecas","Guerrero","Campeche","Veracruz","Yucatán","Jalisco","Coahuila","Tlaxcala","Sonora","Oaxaca","Morelos","Querétaro","Puebla","Tabasco","Tamaulipas","Aguascalientes","Quintana Roo","Hidalgo","San Luis Potosí","Nuevo León","Baja California","Ciudad de México","Estado de México","Chiapas"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Personas estimadas","tickformat":",.0f"},"plot_bgcolor":"#faf6f0","paper_bgcolor":"#ffffff","font":{"family":"Georgia, serif","color":"#333"},"annotations":[{"text":"Fuente: Elaboración propia con microdatos de la Encuesta Intercensal 2025 (INEGI).","xref":"paper","yref":"paper","x":0,"y":-0.41999999999999998,"xanchor":"left","yanchor":"top","showarrow":false,"font":{"family":"Georgia, serif","size":11,"color":"#666"}}],"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["Chiapas","Estado de México","Ciudad de México","Baja California","Nuevo León","San Luis Potosí","Hidalgo","Quintana Roo","Aguascalientes","Tamaulipas","Tabasco","Puebla","Morelos","Querétaro","Oaxaca","Sonora","Coahuila","Tlaxcala","Jalisco","Campeche","Veracruz","Yucatán","Guerrero","Baja California Sur","Colima","Chihuahua","Durango","Guanajuato","Michoacán","Nayarit","Sinaloa","Zacatecas"],"y":[5258,2149,1723,1650,1380,343,205,189,111,108,41,17,15,15,14,11,5,5,3,2,2,2,1,0,0,0,0,0,0,0,0,0],"marker":{"color":[5258,2149,1723,1650,1380,343,205,189,111,108,41,17,15,15,14,11,5,5,3,2,2,2,1,0,0,0,0,0,0,0,0,0],"colorscale":[["0","#fee5d9"],["1","#a50f15"]],"line":{"color":"#67000d","width":1}},"hovertemplate":["<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x}<\/b><br>Personas: %{y:,.0f}<extra><\/extra>"],"type":"bar","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+    </section>
+    <section id="sec2">
+      <h2>Distribución por edad</h2>
+      <p class="desc">Estructura demográfica de la comunidad haitiana</p>
+      <div class="plotly html-widget html-fill-item" id="htmlwidget-588c1eea54ab9dab6cf2" style="width:100%;height:400px;"></div>
+      <script type="application/json" data-for="htmlwidget-588c1eea54ab9dab6cf2">{"x":{"visdat":{"4cc462335dbc":["function () ","plotlyVisDat"]},"cur_data":"4cc462335dbc","attrs":{"4cc462335dbc":{"x":{},"y":{},"marker":{"color":{},"colorscale":[["0","#fee5d9"],["1","#a50f15"]],"line":{"color":"#67000d","width":1}},"hovertemplate":"<b>%{x} años<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","text":{},"textposition":"outside","textfont":{"size":10,"color":"#333"},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":120,"l":60,"t":80,"r":10},"title":{"text":"<b>Población haitiana en México por grupo de edad<\/b><br><sub>Encuesta Intercensal 2025<\/sub>","font":{"family":"Georgia, serif","size":16}},"xaxis":{"domain":[0,1],"automargin":true,"title":"Grupo de edad","tickfont":{"size":11},"type":"category","categoryorder":"array","categoryarray":["0-4","5-9","10-14","15-19","20-29","30-39","40-49","50-59","60-69","70+"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Personas estimadas","tickformat":",.0f"},"plot_bgcolor":"#faf6f0","paper_bgcolor":"#ffffff","font":{"family":"Georgia, serif","color":"#333"},"bargap":0.29999999999999999,"annotations":[{"text":"Fuente: Elaboración propia con microdatos de la Encuesta Intercensal 2025 (INEGI).","xref":"paper","yref":"paper","x":0,"y":-0.25,"xanchor":"left","yanchor":"top","showarrow":false,"font":{"family":"Georgia, serif","size":11,"color":"#666"}}],"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["0-4","5-9","10-14","15-19","20-29","30-39","40-49","50-59","60-69","70+"],"y":[304,769,731,550,3741,4430,2147,410,73,94],"marker":{"color":[304,769,731,550,3741,4430,2147,410,73,94],"colorscale":[["0","#fee5d9"],["1","#a50f15"]],"line":{"color":"#67000d","width":1}},"hovertemplate":["<b>%{x} años<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x} años<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x} años<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x} años<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x} años<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x} años<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x} años<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x} años<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x} años<\/b><br>Personas: %{y:,.0f}<extra><\/extra>","<b>%{x} años<\/b><br>Personas: %{y:,.0f}<extra><\/extra>"],"text":["  304","  769","  731","  550","3,741","4,430","2,147","  410","   73","   94"],"textposition":["outside","outside","outside","outside","outside","outside","outside","outside","outside","outside"],"textfont":{"size":10,"color":"#333"},"type":"bar","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+    </section>
+    <section id="sec3">
+      <h2>Distribución por sexo</h2>
+      <p class="desc">Composición por sexo de la población haitiana</p>
+      <div class="plotly html-widget html-fill-item" id="htmlwidget-2243614393e1b969f0f5" style="width:100%;height:400px;"></div>
+      <script type="application/json" data-for="htmlwidget-2243614393e1b969f0f5">{"x":{"visdat":{"4cc458424dbe":["function () ","plotlyVisDat"]},"cur_data":"4cc458424dbe","attrs":{"4cc458424dbe":{"labels":{},"values":{},"hole":0.55000000000000004,"marker":{"colors":["#00209f","#d21034"],"line":{"color":"#ffffff","width":3}},"textinfo":"label+percent","textfont":{"family":"Georgia, serif","size":14,"color":"#ffffff"},"hovertemplate":"<b>%{label}<\/b><br>Personas: %{value:,.0f}<br>Porcentaje: %{percent}<extra><\/extra>","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"pie"}},"layout":{"margin":{"b":100,"l":60,"t":70,"r":10},"title":{"text":"<b>Distribución por sexo de la población haitiana en México<\/b><br><sub>Encuesta Intercensal 2025<\/sub>","font":{"family":"Georgia, serif","size":16}},"plot_bgcolor":"#faf6f0","paper_bgcolor":"#ffffff","font":{"family":"Georgia, serif","color":"#333"},"showlegend":true,"legend":{"orientation":"h","x":0.5,"xanchor":"center","y":-0.10000000000000001},"annotations":[{"text":"Fuente: Elaboración propia con microdatos de la Encuesta Intercensal 2025 (INEGI).","xref":"paper","yref":"paper","x":0,"y":-0.20000000000000001,"xanchor":"left","yanchor":"top","showarrow":false,"font":{"family":"Georgia, serif","size":11,"color":"#666"}}],"hovermode":"closest"},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"labels":["Hombre","Mujer"],"values":[7341,5908],"hole":0.55000000000000004,"marker":{"color":"rgba(31,119,180,1)","colors":["#00209f","#d21034"],"line":{"color":"#ffffff","width":3}},"textinfo":"label+percent","textfont":{"family":"Georgia, serif","size":14,"color":"#ffffff"},"hovertemplate":["<b>%{label}<\/b><br>Personas: %{value:,.0f}<br>Porcentaje: %{percent}<extra><\/extra>","<b>%{label}<\/b><br>Personas: %{value:,.0f}<br>Porcentaje: %{percent}<extra><\/extra>"],"type":"pie","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+    </section>
+    <section id="sec4">
+      <h2>Estimaciones por entidad federativa</h2>
+      <p class="desc">Tabla detallada con las 32 entidades federativas</p>
+      <div class="datatables html-widget html-fill-item" id="htmlwidget-b130e2d4e366bae2c1c3" style="width:100%;height:auto;"></div>
+      <script type="application/json" data-for="htmlwidget-b130e2d4e366bae2c1c3">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"caption":"<caption style=\"caption-side: bottom; text-align: left; font-family: Georgia, serif; font-size: 12px; color: #666; padding-top: 12px; border-top: 1px solid #e8e8e8; font-style: italic;\">Fuente: Elaboración propia con microdatos de la Encuesta Intercensal 2025 (INEGI).<\/caption>","data":[["Chiapas","Estado de México","Ciudad de México","Baja California","Nuevo León","San Luis Potosí","Hidalgo","Quintana Roo","Aguascalientes","Tamaulipas","Tabasco","Puebla","Morelos","Querétaro","Oaxaca","Sonora","Coahuila","Tlaxcala","Jalisco","Campeche","Veracruz","Yucatán","Guerrero","Baja California Sur","Colima","Chihuahua","Durango","Guanajuato","Michoacán","Nayarit","Sinaloa","Zacatecas"],[5258,2149,1723,1650,1380,343,205,189,111,108,41,17,15,15,14,11,5,5,3,2,2,2,1,0,0,0,0,0,0,0,0,0],[39.68601403879538,16.22009208242131,13.00475507585478,12.45377009585629,10.41588044380708,2.588874632047702,1.547286587666994,1.426522756434448,0.8377990791757868,0.8151558608196845,0.3094573175333988,0.12831157068458,0.1132160917805117,0.1132160917805117,0.1056683523284776,0.08302513397237528,0.03773869726017058,0.03773869726017058,0.02264321835610235,0.01509547890406823,0.01509547890406823,0.01509547890406823,0.007547739452034115,0,0,0,0,0,0,0,0,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Entidad federativa<\/th>\n      <th>Personas estimadas<\/th>\n      <th>Porcentaje (%)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"paging":false,"info":false,"dom":"Bft","order":[[1,"desc"]],"buttons":[{"extend":"copy","text":"📋 Copiar"},{"extend":"csv","text":"📊 CSV"},{"extend":"excel","text":"📗 Excel"},{"extend":"pdf","text":"📄 PDF"}],"language":{"url":"//cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json"},"columnDefs":[{"targets":2,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 2, 3, \",\", \".\", null);\n  }"},{"targets":1,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 0, 3, \",\", \".\", null);\n  }"},{"className":"dt-right","targets":[1,2]},{"name":"entidad","targets":0},{"name":"personas","targets":1},{"name":"porcentaje","targets":2}],"autoWidth":false,"orderClasses":false}},"evals":["options.columnDefs.0.render","options.columnDefs.1.render"],"jsHooks":[]}</script>
+    </section>
+  </div>
+  <footer>
+    <p>
+      <strong>Comunidad haitiana en México</strong>
+    </p>
+    <p>Resultados interactivos de la Encuesta Intercensal 2025</p>
+    <p class="fuente">Fuente: Elaboración propia con microdatos de INEGI · Encuesta Intercensal 2025</p>
+    <br/>
+    <p class="fuente">Todos los cálculos emplean el factor de expansión y respetan el diseño muestral</p>
+  </footer>
+</body>
+</html>
